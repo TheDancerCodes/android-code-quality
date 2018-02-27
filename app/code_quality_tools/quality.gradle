@@ -1,0 +1,37 @@
+
+/*
+  Gradle Tasks:
+  https://docs.gradle.org/current/userguide/tutorial_using_tasks.html
+
+  Checkstyle Gradle Plugin
+  https://docs.gradle.org/current/userguide/checkstyle_plugin.html
+ */
+
+// Create a Gradle task to run the check.
+apply plugin: 'checkstyle'
+
+check.dependsOn 'checkstyle'
+
+// configuration directory path
+def configDir = "${project.rootDir}/app"
+
+checkstyle {
+    toolVersion = 7.2
+}
+
+task checkstyle(type: Checkstyle) {
+    description 'Check Code Standard'
+    group 'verification'
+
+    configFile file("$configDir/code_quality_tools/google-android-checkstyle.xml")
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+    exclude '**/test/**'
+    exclude '**/androidTest/**'
+    exclude '/R.java'
+    exclude '**/BuildConfig.java'
+
+    classpath = files()
+    ignoreFailures = false
+}
