@@ -29,3 +29,12 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }
+
+/*
+   Our quality.gradle Gradle script is being applied with a reference to its local file location.
+
+   See here: Using Gradle Plugins
+   https://docs.gradle.org/current/userguide/plugins.html#sec:using_plugins
+ */
+
+apply from: 'code_quality_tools/quality.gradle'
