@@ -9,6 +9,7 @@
 // Create a Gradle task to run the check.
 apply plugin: 'checkstyle'
 apply plugin: 'pmd'
+apply plugin: 'findbugs'
 
 check.dependsOn 'checkstyle'
 
@@ -53,3 +54,46 @@ task pmd(type: Pmd) {
 
     ignoreFailures = false
 }
+
+// FindBugs Task
+task findbugs(type: FindBugs) {
+    description 'Run FindBugs'
+    group 'verification'
+
+    classes = files("$project.buildDir/intermediates/classes")
+    source 'src'
+//    source = fileTree('src/main/java/')
+
+
+    classpath = files()
+    effort 'max'
+    reportLevel = 'high'
+
+    // Use this only if you want exclude some errors
+    excludeFilter file("$configDir/code_quality_tools/findbugs-exclude.xml")
+
+    reports {
+        xml.enabled = false
+        html.enabled =  true
+    }
+
+    ignoreFailures = false
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
