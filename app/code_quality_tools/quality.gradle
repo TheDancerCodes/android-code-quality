@@ -11,7 +11,7 @@ apply plugin: 'checkstyle'
 apply plugin: 'pmd'
 apply plugin: 'findbugs'
 
-check.dependsOn 'checkstyle'
+check.dependsOn 'checkstyle', 'pmd', 'findbugs', 'lint'
 
 // configuration directory path
 def configDir = "${project.rootDir}/app"
